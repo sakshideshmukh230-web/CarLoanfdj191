@@ -6,4 +6,6 @@ public interface EnquiryServiceI {
 
 	Enquiry saveAll(Enquiry enquiry);
 
+	public Enquiry getSingleCustomer(int customerId);
+
 }
