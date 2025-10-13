@@ -17,6 +17,12 @@ public class EnquiryServiceImpl implements EnquiryServiceI {
 	public Enquiry saveAll(Enquiry enquiry) {
 		return er.save(enquiry);
 	}
+
+	@Override
+	public void deletecustomerId(int customerId) {
+		er.deleteById(customerId);
+		
+	}
 	
 
 }
