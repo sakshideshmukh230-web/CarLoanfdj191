@@ -1,5 +1,7 @@
 package in.nexa.carenquiry.app.serviceimpl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +18,12 @@ public class EnquiryServiceImpl implements EnquiryServiceI {
 	@Override
 	public Enquiry saveAll(Enquiry enquiry) {
 		return er.save(enquiry);
+	}
+
+	@Override
+	public List getPendingStatus() {
+	
+		return er.findByEnquiryStatus("Pending");
 	}
 	
 
