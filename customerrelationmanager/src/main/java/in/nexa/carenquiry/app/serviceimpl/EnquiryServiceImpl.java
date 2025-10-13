@@ -21,9 +21,20 @@ public class EnquiryServiceImpl implements EnquiryServiceI {
 	}
 
 	@Override
+
 	public List getPendingStatus() {
 	
 		return er.findByEnquiryStatus("Pending");
+
+
+	public void deletecustomerId(int customerId) {
+		er.deleteById(customerId);
+		
+
+	public Enquiry getSingleCustomer(int customerId) {
+		
+		return er.findById(customerId).get();
+
 	}
 	
 
