@@ -7,5 +7,6 @@ public interface EnquiryServiceI {
 	Enquiry saveAll(Enquiry enquiry);
 
     public	void deletecustomerId(int customerId);
+	public Enquiry getSingleCustomer(int customerId);
 
 }
