@@ -37,6 +37,11 @@ public class EnquiryServiceImpl implements EnquiryServiceI {
 		return er.findById(customerId).get();
 
 	}
+
+	@Override
+	public List<Enquiry> getAllEnquiry() {
+		return er.findAll();
+	}
 	
 
 }

@@ -15,4 +15,7 @@ public interface EnquiryServiceI {
 	public Enquiry getSingleCustomer(int customerId);
 
 
+	List<Enquiry> getAllEnquiry();
+
+
 }

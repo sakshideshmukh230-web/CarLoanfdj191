@@ -57,5 +57,13 @@ public class EnquiryController {
 		  
 		  return new ResponseEntity<Enquiry>(enquiry,HttpStatus.OK);
 	  }
+	  
+	  
+	  @GetMapping("/getAll")
+	  public ResponseEntity<List<Enquiry>> getAllEnquiry()
+		{
+			List<Enquiry> enquiry= esi.getAllEnquiry();
+			return new ResponseEntity<List<Enquiry>>(enquiry,HttpStatus.OK);
+		} 
 
 }
