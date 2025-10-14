@@ -29,11 +29,7 @@ public class EnquiryController {
 	@Autowired
 	EnquiryServiceI esi;
 	
-	public void m1() {
-		
-	}
-	
-	@PostMapping("/save")
+		@PostMapping("/save")
 	public ResponseEntity<Enquiry> saveEnquiry(@RequestBody Enquiry enquiry) {
 		Enquiry save=	esi.saveAll(enquiry);
 			return new ResponseEntity<Enquiry>(save, HttpStatus.CREATED);
