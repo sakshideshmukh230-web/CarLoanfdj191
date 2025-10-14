@@ -29,7 +29,7 @@ public class EnquiryController {
 	@Autowired
 	EnquiryServiceI esi;
 	
-	@PostMapping("/save")
+		@PostMapping("/save")
 	public ResponseEntity<Enquiry> saveEnquiry(@RequestBody Enquiry enquiry) {
 		Enquiry save=	esi.saveAll(enquiry);
 			return new ResponseEntity<Enquiry>(save, HttpStatus.CREATED);
@@ -57,5 +57,13 @@ public class EnquiryController {
 		  
 		  return new ResponseEntity<Enquiry>(enquiry,HttpStatus.OK);
 	  }
+	  
+	  
+	  @GetMapping("/getAll")
+	  public ResponseEntity<List<Enquiry>> getAllEnquiry()
+		{
+			List<Enquiry> enquiry= esi.getAllEnquiry();
+			return new ResponseEntity<List<Enquiry>>(enquiry,HttpStatus.OK);
+		}  
 
 }
