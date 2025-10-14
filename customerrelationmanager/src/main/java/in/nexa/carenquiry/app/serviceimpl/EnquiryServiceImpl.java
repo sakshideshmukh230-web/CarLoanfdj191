@@ -17,13 +17,13 @@ public class EnquiryServiceImpl implements EnquiryServiceI {
 	public Enquiry saveAll(Enquiry enquiry) {
 		return er.save(enquiry);
 	}
-
+    
 	@Override
 
 	public void deletecustomerId(int customerId) {
 		er.deleteById(customerId);
-		
-
+	}
+	@Override
 	public Enquiry getSingleCustomer(int customerId) {
 		
 		return er.findById(customerId).get();
