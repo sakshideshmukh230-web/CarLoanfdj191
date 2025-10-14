@@ -24,5 +24,6 @@ public class OperationalExecutiveServiceImpl implements OperationalExecutiveServ
 	    List l=	rt.getForObject(getUrl, List.class);
 		return l;
 	}
+	
 
 }

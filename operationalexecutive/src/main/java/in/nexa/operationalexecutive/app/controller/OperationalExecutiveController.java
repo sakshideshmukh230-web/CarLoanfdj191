@@ -26,5 +26,6 @@ public class OperationalExecutiveController {
 		return new ResponseEntity<List>(list, HttpStatus.ACCEPTED );
 		
 	}
+	
 
 }

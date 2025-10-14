@@ -16,12 +16,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import in.nexa.carenquiry.app.model.Enquiry;
 import in.nexa.carenquiry.app.servicei.EnquiryServiceI;
 
 @RestController
+@RequestMapping("/api/enquiry")
 public class EnquiryController {
 	
 	@Autowired
