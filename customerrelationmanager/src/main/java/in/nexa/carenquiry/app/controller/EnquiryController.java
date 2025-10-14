@@ -64,6 +64,6 @@ public class EnquiryController {
 		{
 			List<Enquiry> enquiry= esi.getAllEnquiry();
 			return new ResponseEntity<List<Enquiry>>(enquiry,HttpStatus.OK);
-		} 
+		}  
 
 }

@@ -40,7 +40,7 @@ public class EnquiryServiceImpl implements EnquiryServiceI {
 
 	@Override
 	public List<Enquiry> getAllEnquiry() {
-		return er.findAll();
+		return er.findAll(); 
 	}
 	
 
