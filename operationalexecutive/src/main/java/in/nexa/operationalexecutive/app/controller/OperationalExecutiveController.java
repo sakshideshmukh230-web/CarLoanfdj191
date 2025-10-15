@@ -15,7 +15,7 @@ import in.nexa.operationalexecutive.app.model.Cibil;
 import in.nexa.operationalexecutive.app.model.Enquiry;
 import in.nexa.operationalexecutive.app.servicei.OperationalExecutiveServiceI;
 
-@RestController
+@RestController 
 public class OperationalExecutiveController {
 	
 	@Autowired

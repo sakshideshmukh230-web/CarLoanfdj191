@@ -18,7 +18,7 @@ public class OperationalExecutiveServiceImpl implements OperationalExecutiveServ
 	OperationalExecutiveRepository oer;
 
 	@Autowired
-	RestTemplate rt;
+	RestTemplate rt; 
 	
 	@Override
 	public List getPendingEnquiry() {
