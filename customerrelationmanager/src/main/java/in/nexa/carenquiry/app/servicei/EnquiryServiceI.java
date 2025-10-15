@@ -12,7 +12,11 @@ public interface EnquiryServiceI {
 	public List getPendingStatus();
 
     public	void deletecustomerId(int customerId);
+    
 	public Enquiry getSingleCustomer(int customerId);
+
+
+	List<Enquiry> getAllEnquiry();
 
 
 }

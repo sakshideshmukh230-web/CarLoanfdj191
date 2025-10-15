@@ -19,7 +19,7 @@ public class EnquiryServiceImpl implements EnquiryServiceI {
 	public Enquiry saveAll(Enquiry enquiry) {
 		return er.save(enquiry);
 	}
-
+    
 	@Override
 
 	public List getPendingStatus() {
@@ -31,10 +31,16 @@ public class EnquiryServiceImpl implements EnquiryServiceI {
 		er.deleteById(customerId);
 	}
 
+	@Override
 	public Enquiry getSingleCustomer(int customerId) {
 		
 		return er.findById(customerId).get();
 
+	}
+
+	@Override
+	public List<Enquiry> getAllEnquiry() {
+		return er.findAll(); 
 	}
 	
 
