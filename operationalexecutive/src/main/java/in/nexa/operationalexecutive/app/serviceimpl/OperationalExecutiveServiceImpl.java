@@ -20,7 +20,7 @@ public class OperationalExecutiveServiceImpl implements OperationalExecutiveServ
 	
 	@Override
 	public List getPendingEnquiry() {
-		String getUrl= "http://localhost:9091/getpendingenquiry";
+		String getUrl= "http://localhost:9091/api/enquiry/getpendingenquiry";
 	    List l=	rt.getForObject(getUrl, List.class);
 		return l;
 	}
