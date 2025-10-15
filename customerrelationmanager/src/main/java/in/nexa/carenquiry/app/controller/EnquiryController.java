@@ -58,6 +58,10 @@ public class EnquiryController {
 		  return new ResponseEntity<Enquiry>(enquiry,HttpStatus.OK);
 	  }
 	  
+<<<<<<< HEAD
+=======
+	   
+>>>>>>> branch 'main' of https://github.com/sakshideshmukh230-web/CarLoanfdj191.git
 	  @GetMapping("/getAll")
 	  public ResponseEntity<List<Enquiry>> getAllEnquiry()
 		{
