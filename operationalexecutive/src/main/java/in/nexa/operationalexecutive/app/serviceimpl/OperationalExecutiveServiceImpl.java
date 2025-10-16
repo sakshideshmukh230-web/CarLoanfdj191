@@ -1,8 +1,13 @@
 package in.nexa.operationalexecutive.app.serviceimpl;
 
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -20,6 +25,13 @@ public class OperationalExecutiveServiceImpl implements OperationalExecutiveServ
 	@Autowired
 	RestTemplate rt; 
 	
+	@Autowired 
+	JavaMailSender sender;
+
+	
+	@Value("${spring.mail.username}")
+	private static String sendFrom;
+	
 	@Override
 	public List getPendingEnquiry() {
 		String getUrl= "http://localhost:9091/api/enquiry/getpendingenquiry";
@@ -27,44 +39,94 @@ public class OperationalExecutiveServiceImpl implements OperationalExecutiveServ
 		return l;
 	}
  
-	@Override
+	@Override  
 	public Cibil calculateCibil(int customerId) {
 		
 		String getCibilUrl = "http://localhost:9095/cibil";
 		int cibilscore = rt.getForObject(getCibilUrl, Integer.class);
 		System.out.println(cibilscore);
-		
+		 
 		String getUrl ="http://localhost:9091/api/enquiry/getsinglecustomer/"+customerId;
 		Enquiry e = rt.getForObject(getUrl, Enquiry.class);
 		System.out.println(e.getEmail());
 		
-		e.getCibil().setCibilScore(cibilscore);
-		if(cibilscore >= 800 && cibilscore<= 900) {
-			e.getCibil().setStatus("Excellent");
-			e.getCibil().setCibilRemark("Approved");
+		if(e.getCibil().getCibilScore() == 0) { 
+			
+			e.getCibil().setCibilScore(cibilscore);
+						
+			if(cibilscore >= 800 && cibilscore<= 900) {
+				e.getCibil().setStatus("Excellent");
+				e.getCibil().setCibilRemark("Approved");
+				e.setEnquiryStatus("Approved");
+				
+				SimpleMailMessage message = new SimpleMailMessage();
+				message.setTo(e.getEmail());
+				message.setSubject("related car Enquiry");
+				message.setFrom(sendFrom);
+				message.setText("Your are eligible for the car loan "+ "Customer Id is "+ e.getCustomerId() +" \n "+ e.getFirstname());
+				
+			   sender.send(message);
+			}
+			else if(cibilscore >= 760 && cibilscore <= 800) {
+				e.getCibil().setStatus("Very Good ");
+				e.getCibil().setCibilRemark("Approved");
+				e.setEnquiryStatus("Approved");
+				
+				SimpleMailMessage message = new SimpleMailMessage();
+				message.setTo(e.getEmail());
+				message.setSubject("related car Enquiry");
+				message.setFrom(sendFrom);
+				message.setText("Your are eligible for the car loan "+ "Customer Id is "+ e.getCustomerId() +" \n "+ e.getFirstname());
+				
+			   sender.send(message);
+			}
+			else if(cibilscore >= 700 && cibilscore <= 760) {
+				e.getCibil().setStatus(" Good ");
+				e.getCibil().setCibilRemark("Approved");
+				e.setEnquiryStatus("Approved");
+				
+				SimpleMailMessage message = new SimpleMailMessage();
+				message.setTo(e.getEmail());
+				message.setSubject("related car Enquiry");
+				message.setFrom(sendFrom);
+				message.setText("Your are eligible for the car loan "+ "Customer Id is "+ e.getCustomerId() +" \n "+ e.getFirstname());
+				
+			   sender.send(message);
+			}
+			else if(cibilscore >= 600 && cibilscore <=700) {
+				e.getCibil().setStatus("Average");
+				e.getCibil().setCibilRemark("Rejected");
+				e.setEnquiryStatus("Rejected");
+				
+				SimpleMailMessage message = new SimpleMailMessage();
+				message.setTo(e.getEmail());
+				message.setSubject("related car Enquiry");
+				message.setFrom(sendFrom);
+				message.setText("Your are not eligible for the car loan "+ "Customer Id is "+ e.getCustomerId() +" \n "+ e.getFirstname());
+				
+			   sender.send(message);
+			}
+			else if(cibilscore >= 300 && cibilscore <=600) {
+				e.getCibil().setStatus("Poor");
+				e.getCibil().setCibilRemark("Rejected");
+				e.setEnquiryStatus("Rejected");
+				
+				SimpleMailMessage message = new SimpleMailMessage();
+				message.setTo(e.getEmail());
+				message.setSubject("related car Enquiry");
+				message.setFrom(sendFrom);
+				message.setText("Your are not eligible for the car loan "+ "Customer Id is "+ e.getCustomerId() +" \n "+ e.getFirstname());
+				
+			   sender.send(message);
+			}
+			
+			oer.save(e);
 		}
-		else if(cibilscore >= 760 && cibilscore <= 800) {
-			e.getCibil().setStatus("Very Good ");
-			e.getCibil().setCibilRemark("Approved");;
-		}
-		else if(cibilscore >= 700 && cibilscore <= 760) {
-			e.getCibil().setStatus(" Good ");
-			e.getCibil().setCibilRemark("Approved");
-		}
-		else if(cibilscore >= 600 && cibilscore <=700) {
-			e.getCibil().setStatus("Average");
-			e.getCibil().setCibilRemark("Rejected");
-		}
-		else if(cibilscore >= 300 && cibilscore <=600) {
-			e.getCibil().setStatus("Poor");
-			e.getCibil().setCibilRemark("Rejected");
-		}
-		
-		oer.save(e);
+		System.out.println("Cibil Already Genrated..");
 		
 		return e.getCibil(); 
 		
-	}
+	}  
 	
 	
 
