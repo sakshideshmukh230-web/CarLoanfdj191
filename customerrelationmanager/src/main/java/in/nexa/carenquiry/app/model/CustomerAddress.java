@@ -10,20 +10,17 @@ import lombok.Data;
 
 @Data
 @Entity
-public class Enquiry {
+public class CustomerAddress {
 	
 	@Id 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int customerId;
-	private String firstname;
-	private String lastName;
-	private int age;
-	private String email;
-	private String mobileNo;
-	private String pancardNo;
-	private String enquiryStatus="Pending";
+	private int customerAddressId;
 	
 	@OneToOne(cascade = CascadeType.ALL)
-	private Cibil cibil;
+	private PermanentAddress permanentAddress;
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	private LocalAddress localAddress;
+
 
 }
