@@ -27,6 +27,8 @@ public class CustomerLoanApplication {
 		private Double	customerTotalLoanRequired;
 		private String	loanStatus;
 		
+		@OneToOne(cascade = CascadeType.ALL)
+		private AllPersonalDocuments allPersonalDocuments;
 		
 		@OneToOne(cascade = CascadeType.ALL)
 		private DependentInformation familydependentInfo;
