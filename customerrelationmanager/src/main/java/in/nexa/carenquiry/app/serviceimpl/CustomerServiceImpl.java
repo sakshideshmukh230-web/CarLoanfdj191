@@ -18,11 +18,7 @@ public class CustomerServiceImpl implements  CustomerServiceI{
 	@Autowired
 	CustomerRepo cr;
 
-	@Override
-	public CustomerLoanApplication saveCustomers(CustomerLoanApplication customerapp) {
-		return cr.save(customerapp);
-	}
-
+	
 	@Override
 	public CustomerLoanApplication saveCustomerWithDocs(String data, MultipartFile addressProof, MultipartFile panCard,
 			MultipartFile incomeTax, MultipartFile addharCard, MultipartFile photo, MultipartFile signature,

@@ -2,7 +2,9 @@ package in.nexa.carenquiry.app.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,14 +23,8 @@ public class CustomerController {
 	@Autowired
 	CustomerServiceI csi;
 	
-	@PostMapping("/saveCustomer")
-	public ResponseEntity<CustomerLoanApplication> saveApplicationForm(@RequestBody CustomerLoanApplication customerapp){
-		csi.saveCustomers(customerapp);
-		System.out.println(customerapp.getCustomerEmail());
-		return new ResponseEntity<CustomerLoanApplication> (customerapp, HttpStatus.CREATED);
-	}
 
-	@PostMapping("/saveDataWithDocs")
+	@PostMapping(value = "/saveDataWithDocs", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	public ResponseEntity<String> saveDataWithDocs(@RequestPart("data") String data , @RequestPart("addressProof") MultipartFile addressProof, @RequestPart("panCard") MultipartFile panCard, @RequestPart("incomeTax") MultipartFile incomeTax,
 			 @RequestPart("addharCard") MultipartFile addharCard, @RequestPart("photo") MultipartFile photo,  @RequestPart("signature")MultipartFile signature,  @RequestPart("banckCheque")MultipartFile bankCheque, @RequestPart("salarySlips")MultipartFile salarySlips) {
 		
