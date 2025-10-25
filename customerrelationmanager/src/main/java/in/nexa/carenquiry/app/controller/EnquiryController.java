@@ -7,8 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import org.springframework.web.bind.annotation.GetMapping;
-
-
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,6 +23,7 @@ import in.nexa.carenquiry.app.servicei.EnquiryServiceI;
 
 @RestController
 @RequestMapping("/api/enquiry")
+@CrossOrigin("*")
 public class EnquiryController {
 	
 	@Autowired
@@ -32,7 +32,7 @@ public class EnquiryController {
 		@PostMapping("/save")
 	public ResponseEntity<Enquiry> saveEnquiry(@RequestBody Enquiry enquiry) {
 		Enquiry save=	esi.saveAll(enquiry);
-			return new ResponseEntity<Enquiry>(save, HttpStatus.CREATED);
+		return new ResponseEntity<Enquiry>(save, HttpStatus.CREATED);
 		}
 	
 	@DeleteMapping("/deletecustomerId/{customerId}")
@@ -40,7 +40,6 @@ public class EnquiryController {
 	    System.out.println(customerId);
 	    esi.deletecustomerId(customerId);
 	}
-
 
 	
 	@GetMapping("/getpendingenquiry")
@@ -66,4 +65,11 @@ public class EnquiryController {
 			return new ResponseEntity<List<Enquiry>>(enquiry,HttpStatus.OK);
 		}  
 
-}
+	  @GetMapping("/forwardedToOe/{customerId}")
+	  public ResponseEntity<Enquiry> forwardedToOe(@PathVariable("customerId")int customerId)
+	  {
+		  Enquiry enquiry = esi.forwardedToOe(customerId);
+		return new ResponseEntity<Enquiry>(enquiry,HttpStatus.OK);
+		   
+	  }  
+} 

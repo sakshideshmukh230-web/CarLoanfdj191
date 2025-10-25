@@ -18,7 +18,8 @@ public interface EnquiryServiceI {
 
 	List<Enquiry> getAllEnquiry();
 
-	
+
+	Enquiry forwardedToOe(int customerId);
 
 
 }
