@@ -126,6 +126,13 @@ public class OperationalExecutiveServiceImpl implements OperationalExecutiveServ
 		
 		return e.getCibil(); 
 		
+	}
+
+	@Override
+	public List<Enquiry> getforwardtoOE() {
+		String getUrl= "http://localhost:9091/api/enquiry/getforwardtoOE";
+	    List l=	rt.getForObject(getUrl, List.class);
+		return l;
 	}  
 	
 	
