@@ -9,9 +9,13 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import in.nexa.operationalexecutive.app.model.Cibil;
+import in.nexa.operationalexecutive.app.model.CustomerLoanApplication;
+import in.nexa.operationalexecutive.app.model.CustomerVerification;
 import in.nexa.operationalexecutive.app.model.Enquiry;
 import in.nexa.operationalexecutive.app.servicei.OperationalExecutiveServiceI;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
@@ -26,9 +30,7 @@ public class OperationalExecutiveController {
 
 	@GetMapping("/getbystatus")
 	public ResponseEntity<List> getPendingEnquiry(){
-		
 		List list=  oei.getPendingEnquiry();
-		
 		return new ResponseEntity<List>(list, HttpStatus.OK);
 		
 	}
@@ -36,9 +38,30 @@ public class OperationalExecutiveController {
 	@GetMapping("/getCibilScore/{customerId}")
 	public ResponseEntity<Cibil> calculateCibil(@PathVariable("customerId")int customerId) {
 		Cibil cibil = oei.calculateCibil(customerId);
-		return new ResponseEntity<Cibil>(cibil,HttpStatus.OK);
-				
+		return new ResponseEntity<Cibil>(cibil,HttpStatus.OK);		
 	}
+	
+	@GetMapping("/getForwardedToOe")
+	public ResponseEntity<List<Enquiry>> getforwardedToOe() {
+	    List<Enquiry> list = oei.getforwardedToOe();
+	    return new ResponseEntity<>(list, HttpStatus.OK);
+	}
+	
+	
+	 @GetMapping("/getSubmittedApplications")
+	    public ResponseEntity<List<CustomerLoanApplication>> getSubmittedApplications() {
+	        List<CustomerLoanApplication> customerApplications = oei.getSubmittedApplications();
+	        return new ResponseEntity<List<CustomerLoanApplication>>(customerApplications,HttpStatus.OK);
+	    }
+	 
+
+	
+	@PatchMapping("/updateStatus/{verificationID}/{status}")
+	    public ResponseEntity<CustomerVerification> updateStatus(@PathVariable int verificationID, @PathVariable String status) {
+		System.out.println(verificationID + " " + status);
+	        CustomerVerification cv = oei.updateVerificationStatus(verificationID, status);
+	        return new ResponseEntity<CustomerVerification>(cv,HttpStatus.OK);
+	    }
 
 	  @GetMapping("/getforwardtoOE")
 	  public List<Enquiry> getforwardtoOE()

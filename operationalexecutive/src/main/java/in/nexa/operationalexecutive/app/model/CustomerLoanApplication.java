@@ -1,4 +1,4 @@
-package in.nexa.carenquiry.app.model;
+package in.nexa.operationalexecutive.app.model;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -43,13 +43,7 @@ public class CustomerLoanApplication {
 		@OneToOne(cascade = CascadeType.ALL)
 		private GuarantorDetails guarantorDetails;
 		
-
-		
-
-
-
 		@OneToOne(cascade = CascadeType.ALL)
 		private CustomerVerification customerVerification;
 		
-
 }

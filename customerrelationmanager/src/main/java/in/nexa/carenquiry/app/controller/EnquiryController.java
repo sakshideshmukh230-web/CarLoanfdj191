@@ -70,9 +70,9 @@ public class EnquiryController {
 	  {
 		  Enquiry enquiry = esi.forwardedToOe(customerId);
 		return new ResponseEntity<Enquiry>(enquiry,HttpStatus.OK);
-		   
 	  }  
 	  
+
 	  @GetMapping("/getforwardtoOE")
 	  public List<Enquiry> getforwardtoOE()
 	  {
@@ -91,3 +91,19 @@ public class EnquiryController {
        } 
 	  
 }
+	  
+	  @GetMapping("/rejectedStatus")
+	  public ResponseEntity<List> rejectedStatus()
+	  {
+		  List<String> list = esi.rejectedStatus();
+		  return new ResponseEntity<List>(list,HttpStatus.OK);
+	  }
+	  
+	  @GetMapping("/approvedStatus")
+	  public ResponseEntity<List> approvedStatus()
+	  {
+		  List<String> list = esi.approvedStatus();
+		  return new ResponseEntity<List>(list,HttpStatus.OK);
+	  }
+} 
+

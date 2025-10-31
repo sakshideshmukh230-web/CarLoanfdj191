@@ -20,36 +20,39 @@ public class EnquiryServiceImpl implements EnquiryServiceI {
 		enquiry.getCibil().setCibilscoredDateTime(new Date());
 		return er.save(enquiry);
 	}
+	
     
 	@Override
-
 	public List getPendingStatus() {
-	
 		return er.findByEnquiryStatus("Pending");
 	}
 
+	
+	@Override
 	public void deletecustomerId(int customerId) {
 		er.deleteById(customerId);
 	}
 
+	
 	@Override
 	public Enquiry getSingleCustomer(int customerId) {
-		
 		return er.findById(customerId).get();
-
 	}
+	
 
 	@Override
 	public List<Enquiry> getAllEnquiry() {
 		return er.findAll(); 
 	}
 
+	
 	@Override
 	public Enquiry forwardedToOe(int customerId) {
 		Enquiry e = er.findById(customerId).get();
 		e.setEnquiryStatus("forwardedtooe");
 		return er.save(e);
 	}
+
 
 	@Override
 	public List<Enquiry> getforwardtoOE() {
@@ -63,4 +66,13 @@ public class EnquiryServiceImpl implements EnquiryServiceI {
 		return er.findByEnquiryStatus("Approved");
 	}
 
+
+	
+	@Override
+	public List<String> rejectedStatus() {
+		return er.findByEnquiryStatus("Rejected");
+	}
+	
+	
+	
 }

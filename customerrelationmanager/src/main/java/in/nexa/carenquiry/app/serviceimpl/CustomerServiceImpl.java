@@ -1,15 +1,18 @@
 package in.nexa.carenquiry.app.serviceimpl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
 import in.nexa.carenquiry.app.CustomerrelationmanagerApplication;
 import in.nexa.carenquiry.app.model.AllPersonalDocuments;
+
+
 import in.nexa.carenquiry.app.model.CustomerLoanApplication;
+import in.nexa.carenquiry.app.model.CustomerVerification;
 import in.nexa.carenquiry.app.repository.CustomerRepo;
 import in.nexa.carenquiry.app.servicei.CustomerServiceI;
 
@@ -21,7 +24,10 @@ public class CustomerServiceImpl implements  CustomerServiceI{
 	CustomerRepo cr;
 
 
+
+
 	
+
 	@Override
 	public CustomerLoanApplication saveCustomerWithDocs(String data, MultipartFile addressProof, MultipartFile panCard,
 			MultipartFile incomeTax, MultipartFile addharCard, MultipartFile photo, MultipartFile signature,
@@ -48,8 +54,21 @@ public class CustomerServiceImpl implements  CustomerServiceI{
 			
 			System.out.println(e.getMessage());
 		} 
+		return null;
 		
+	}
+
+
+	@Override
+	public List<CustomerLoanApplication> getSubmittedApplications() {
+		return cr.findByLoanStatus("submited");
+	}
+
+
+	@Override
+	public CustomerVerification updateVerificationStatus(int verificationID, String status) {
 		
 		return null;
 	}
+	
 }

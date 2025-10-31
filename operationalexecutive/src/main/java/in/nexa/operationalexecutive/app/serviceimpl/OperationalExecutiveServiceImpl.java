@@ -3,6 +3,7 @@ package in.nexa.operationalexecutive.app.serviceimpl;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -12,7 +13,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import in.nexa.operationalexecutive.app.model.Cibil;
+import in.nexa.operationalexecutive.app.model.CustomerLoanApplication;
+import in.nexa.operationalexecutive.app.model.CustomerVerification;
 import in.nexa.operationalexecutive.app.model.Enquiry;
+import in.nexa.operationalexecutive.app.repository.CustomerLoanApplicationRepo;
+import in.nexa.operationalexecutive.app.repository.CustomerVerificationRepo;
 import in.nexa.operationalexecutive.app.repository.OperationalExecutiveRepository;
 import in.nexa.operationalexecutive.app.servicei.OperationalExecutiveServiceI;
 
@@ -21,6 +26,12 @@ public class OperationalExecutiveServiceImpl implements OperationalExecutiveServ
 {
 	@Autowired
 	OperationalExecutiveRepository oer;
+	
+	@Autowired
+	CustomerVerificationRepo cvr;
+	
+	@Autowired
+	CustomerLoanApplicationRepo cla;
 
 	@Autowired
 	RestTemplate rt; 
@@ -129,6 +140,7 @@ public class OperationalExecutiveServiceImpl implements OperationalExecutiveServ
 	}
 
 	@Override
+
 	public List<Enquiry> getforwardtoOE() {
 		String getUrl= "http://localhost:9091/api/enquiry/getforwardtoOE";
 	    List l=	rt.getForObject(getUrl, List.class);
@@ -136,7 +148,25 @@ public class OperationalExecutiveServiceImpl implements OperationalExecutiveServ
 	}
 
 
-	
+  
 	
 
+	@Override
+	public CustomerVerification updateVerificationStatus(int verificationID,String status) {
+	System.out.println(verificationID + " " + status);
+	Optional<CustomerVerification> op =	cvr.findById(verificationID);	
+	CustomerVerification customerVerification = op.get();
+	customerVerification.setStatus(status);
+	return cvr.save(customerVerification);
+			
+	}
+
+	
+	@Override
+	public List<CustomerLoanApplication> getSubmittedApplications() {
+		return cla.findByLoanStatus("submitted");
+	}
+
 }
+
+
