@@ -140,9 +140,15 @@ public class OperationalExecutiveServiceImpl implements OperationalExecutiveServ
 	}
 
 	@Override
-	public List<Enquiry> getforwardedToOe() {
-		 return oer.findByEnquiryStatus("forwardedtooe");
+
+	public List<Enquiry> getforwardtoOE() {
+		String getUrl= "http://localhost:9091/api/enquiry/getforwardtoOE";
+	    List l=	rt.getForObject(getUrl, List.class);
+		return l;
 	}
+
+
+  
 	
 
 	@Override

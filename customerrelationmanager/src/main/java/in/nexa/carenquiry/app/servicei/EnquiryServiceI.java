@@ -22,6 +22,12 @@ public interface EnquiryServiceI {
 	Enquiry forwardedToOe(int customerId);
 
 
+
+	public List<Enquiry> getforwardtoOE();
+
+
+	public List getapprovedEnquiry();
+
 	List<String> rejectedStatus();
 
 
@@ -29,6 +35,7 @@ public interface EnquiryServiceI {
 
 
 	
+
 
 
 }

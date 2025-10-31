@@ -18,6 +18,7 @@ import in.nexa.operationalexecutive.app.model.CustomerLoanApplication;
 import in.nexa.operationalexecutive.app.model.CustomerVerification;
 import in.nexa.operationalexecutive.app.model.Enquiry;
 import in.nexa.operationalexecutive.app.servicei.OperationalExecutiveServiceI;
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
 
 @RestController 
 @CrossOrigin("*")
@@ -61,5 +62,15 @@ public class OperationalExecutiveController {
 	        CustomerVerification cv = oei.updateVerificationStatus(verificationID, status);
 	        return new ResponseEntity<CustomerVerification>(cv,HttpStatus.OK);
 	    }
+
+	  @GetMapping("/getforwardtoOE")
+	  public List<Enquiry> getforwardtoOE()
+	  {
+		  List<Enquiry> enquiry=oei.getforwardtoOE();
+		  
+		  return enquiry;
+		  
+	  }
+	 
 
 }

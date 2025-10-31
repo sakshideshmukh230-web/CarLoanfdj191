@@ -53,6 +53,20 @@ public class EnquiryServiceImpl implements EnquiryServiceI {
 		return er.save(e);
 	}
 
+
+	@Override
+	public List<Enquiry> getforwardtoOE() {
+		// TODO Auto-generated method stub
+		return er.findByEnquiryStatus("forwardedtooe");
+	}
+
+	@Override
+	public List getapprovedEnquiry() {
+		
+		return er.findByEnquiryStatus("Approved");
+	}
+
+
 	
 	@Override
 	public List<String> rejectedStatus() {
@@ -60,8 +74,5 @@ public class EnquiryServiceImpl implements EnquiryServiceI {
 	}
 	
 	
-	@Override
-	public List<String> approvedStatus() {
-		return er.findByEnquiryStatus("Approved");
-	}
+	
 }
