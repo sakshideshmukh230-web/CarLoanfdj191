@@ -22,4 +22,13 @@ public interface EnquiryServiceI {
 	Enquiry forwardedToOe(int customerId);
 
 
+	List<String> rejectedStatus();
+
+
+	List<String> approvedStatus();
+
+
+	
+
+
 }

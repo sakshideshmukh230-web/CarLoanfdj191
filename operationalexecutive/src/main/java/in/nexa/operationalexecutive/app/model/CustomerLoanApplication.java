@@ -1,4 +1,4 @@
-package in.nexa.carenquiry.app.model;
+package in.nexa.operationalexecutive.app.model;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
