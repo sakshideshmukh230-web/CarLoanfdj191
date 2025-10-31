@@ -43,6 +43,7 @@ public class CustomerLoanApplication {
 		@OneToOne(cascade = CascadeType.ALL)
 		private GuarantorDetails guarantorDetails;
 		
+		
 
 
 }

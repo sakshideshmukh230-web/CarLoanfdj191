@@ -25,10 +25,10 @@ public class CustomerController {
 	@Autowired
 	CustomerServiceI csi;
 	
-
+ 
 	@PostMapping(value = "/saveDataWithDocs", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	public ResponseEntity<String> saveDataWithDocs(@RequestPart("data") String data , @RequestPart("addressProof") MultipartFile addressProof, @RequestPart("panCard") MultipartFile panCard, @RequestPart("incomeTax") MultipartFile incomeTax,
-			 @RequestPart("addharCard") MultipartFile addharCard, @RequestPart("photo") MultipartFile photo,  @RequestPart("signature")MultipartFile signature,  @RequestPart("banckCheque")MultipartFile bankCheque, @RequestPart("salarySlips")MultipartFile salarySlips) {
+			 @RequestPart("addharCard") MultipartFile addharCard, @RequestPart("photo") MultipartFile photo,  @RequestPart("signature")MultipartFile signature,  @RequestPart("bankCheque")MultipartFile bankCheque, @RequestPart("salarySlips")MultipartFile salarySlips) {
 		
 		csi.saveCustomerWithDocs(data, addressProof, panCard, incomeTax, addharCard, photo, signature, bankCheque, salarySlips);
 	

@@ -7,12 +7,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import in.nexa.operationalexecutive.app.model.Cibil;
 import in.nexa.operationalexecutive.app.model.Enquiry;
 import in.nexa.operationalexecutive.app.servicei.OperationalExecutiveServiceI;
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
 
 @RestController 
 @CrossOrigin("*")
@@ -38,7 +40,7 @@ public class OperationalExecutiveController {
 				
 	}
 
-	 @GetMapping("/getforwardtoOE")
+	  @GetMapping("/getforwardtoOE")
 	  public List<Enquiry> getforwardtoOE()
 	  {
 		  List<Enquiry> enquiry=oei.getforwardtoOE();
@@ -46,4 +48,6 @@ public class OperationalExecutiveController {
 		  return enquiry;
 		  
 	  }
+	 
+
 }
