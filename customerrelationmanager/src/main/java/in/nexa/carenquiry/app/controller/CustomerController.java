@@ -35,10 +35,17 @@ public class CustomerController {
 	public ResponseEntity<String> saveDataWithDocs(@RequestPart("data") String data , @RequestPart("addressProof") MultipartFile addressProof, @RequestPart("panCard") MultipartFile panCard, @RequestPart("incomeTax") MultipartFile incomeTax,
 			 @RequestPart("addharCard") MultipartFile addharCard, @RequestPart("photo") MultipartFile photo,  @RequestPart("signature")MultipartFile signature,  @RequestPart("bankCheque")MultipartFile bankCheque, @RequestPart("salarySlips")MultipartFile salarySlips) {
 		
-		csi.saveCustomerWithDocs(data, addressProof, panCard, incomeTax, addharCard, photo, signature, bankCheque, salarySlips);
+		CustomerLoanApplication saved = csi.saveCustomerWithDocs(data, addressProof, panCard, incomeTax, addharCard, photo, signature, bankCheque, salarySlips);
 		System.out.println(data);
-		return new ResponseEntity<String> ("Data inserted......", HttpStatus.OK);
+		
+		if (saved == null) {
+	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+	                .body("Failed to save data");
+	    }
+		
+		return ResponseEntity.ok("Data inserted successfully..");
 	}
 	
+
 	}
 

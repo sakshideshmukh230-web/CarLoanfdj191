@@ -46,4 +46,9 @@ public class CustomerLoanApplication {
 		@OneToOne(cascade = CascadeType.ALL)
 		private CustomerVerification customerVerification;
 		
+		@OneToOne(cascade = CascadeType.ALL)
+		private SanctionLetter sanctionLetter;
+		
+		
+		
 }

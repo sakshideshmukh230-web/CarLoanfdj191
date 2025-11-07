@@ -49,7 +49,9 @@ public class OperationalExecutiveServiceImpl implements OperationalExecutiveServ
 	    List l=	rt.getForObject(getUrl, List.class);
 		return l;
 	}
- 
+   
+	
+	
 	@Override  
 	public Cibil calculateCibil(int customerId) {
 		
@@ -139,27 +141,51 @@ public class OperationalExecutiveServiceImpl implements OperationalExecutiveServ
 		
 	}
 
-	@Override
-	public List<Enquiry> getforwardedToOe() {
-		 return oer.findByEnquiryStatus("forwardedtooe");
-	}
+//	@Override
+//	public List<Enquiry> getforwardedToOe() {
+//		 return oer.findByEnquiryStatus("forwardedtooe");
+//	}
+//	
 	
-
-	@Override
-	public CustomerVerification updateVerificationStatus(int verificationID,String status) {
-	System.out.println(verificationID + " " + status);
-	Optional<CustomerVerification> op =	cvr.findById(verificationID);	
-	CustomerVerification customerVerification = op.get();
-	customerVerification.setStatus(status);
-	return cvr.save(customerVerification);
-			
-	}
 
 	
 	@Override
 	public List<CustomerLoanApplication> getSubmittedApplications() {
 		return cla.findByLoanStatus("submitted");
 	}
+
+	@Override
+	public List<Enquiry> getforwardtoOE() {
+		String getUrl= "http://localhost:9091/api/enquiry/getforwardtoOE";
+	    List l=	rt.getForObject(getUrl, List.class);
+		return l;
+	}
+	
+	
+	
+		@Override
+		public CustomerVerification updateVerificationStatus(int customerId, int verificationID,String status) {
+			System.out.println(verificationID + " " + status);
+			
+			Optional<CustomerVerification> op =	cvr.findById(verificationID);	
+			CustomerVerification customerVerification = op.get();
+			customerVerification.setStatus(status);
+			cvr.save(customerVerification);
+			
+			Optional<CustomerLoanApplication> loanAppOpt = cla.findById(customerId); 
+		    if (loanAppOpt.isEmpty()) {
+		        throw new RuntimeException("CustomerLoanApplication not found for ID: " + customerId);
+		    }
+	
+		    CustomerLoanApplication customerLoanApplication = loanAppOpt.get();
+		    customerLoanApplication.setLoanStatus(status);
+		    cla.save(customerLoanApplication);
+		    
+		    System.out.println("verificationStatus & loanStatus Updated..");
+			
+			return customerVerification;
+				
+		}
 
 }
 

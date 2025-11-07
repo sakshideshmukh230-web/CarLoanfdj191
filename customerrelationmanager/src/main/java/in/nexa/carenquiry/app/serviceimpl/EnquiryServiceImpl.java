@@ -64,4 +64,16 @@ public class EnquiryServiceImpl implements EnquiryServiceI {
 	public List<String> approvedStatus() {
 		return er.findByEnquiryStatus("Approved");
 	}
+
+
+	@Override
+	public List<Enquiry> getforwardtoOE() {
+			return er.findByEnquiryStatus("forwardedtooe");
+	}
+
+
+	@Override
+	public List getapprovedEnquiry() {
+	return er.findByEnquiryStatus("Approved");
+	}
 }

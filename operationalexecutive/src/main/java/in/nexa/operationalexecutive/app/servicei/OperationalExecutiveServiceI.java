@@ -13,16 +13,15 @@ public interface OperationalExecutiveServiceI {
 
 	public Cibil calculateCibil(int customerId);
 
-	public List<Enquiry> getforwardedToOe();
+//	public List<Enquiry> getforwardedToOe();
 
-	public CustomerVerification updateVerificationStatus(int verificationID, String status);
+	public CustomerVerification updateVerificationStatus(int customerId, int verificationID, String status);
 
 	public List<CustomerLoanApplication> getSubmittedApplications();
 
+	public List<Enquiry> getforwardtoOE();
+
 	
 
-//	public List<Enquiry> getSubmittedEnquiries();
-//
-//	public CustomerVerification updateVerificationDetails(int verificationId, String status);
 
 }

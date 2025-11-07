@@ -17,5 +17,8 @@ public List<CustomerLoanApplication> getSubmittedApplications();
 
 
 public CustomerVerification updateVerificationStatus(int verificationID, String status);
+
+
+
 }
 

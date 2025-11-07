@@ -40,25 +40,32 @@ public class OperationalExecutiveController {
 		return new ResponseEntity<Cibil>(cibil,HttpStatus.OK);		
 	}
 	
-	@GetMapping("/getForwardedToOe")
-	public ResponseEntity<List<Enquiry>> getforwardedToOe() {
-	    List<Enquiry> list = oei.getforwardedToOe();
-	    return new ResponseEntity<>(list, HttpStatus.OK);
-	}
+//	@GetMapping("/getForwardedToOe")
+//	public ResponseEntity<List<Enquiry>> getforwardedToOe() {
+//	    List<Enquiry> list = oei.getforwardedToOe();
+//	    return new ResponseEntity<>(list, HttpStatus.OK);
+//	}
+//	
 	
+	 @GetMapping("/getforwardtoOE")
+	  public List<Enquiry> getforwardtoOE()
+	  {
+		  List<Enquiry> enquiry=oei.getforwardtoOE();
+		  return enquiry;
+	  }
+	 
 	
 	 @GetMapping("/getSubmittedApplications")
 	    public ResponseEntity<List<CustomerLoanApplication>> getSubmittedApplications() {
 	        List<CustomerLoanApplication> customerApplications = oei.getSubmittedApplications();
 	        return new ResponseEntity<List<CustomerLoanApplication>>(customerApplications,HttpStatus.OK);
 	    }
-	 
 
 	
-	@PatchMapping("/updateStatus/{verificationID}/{status}")
-	    public ResponseEntity<CustomerVerification> updateStatus(@PathVariable int verificationID, @PathVariable String status) {
-		System.out.println(verificationID + " " + status);
-	        CustomerVerification cv = oei.updateVerificationStatus(verificationID, status);
+	 @PatchMapping("/updateStatus/{customerId}/{verificationID}/{status}")
+	    public ResponseEntity<CustomerVerification> updateStatus(@PathVariable int customerId, @PathVariable int verificationID, @PathVariable String status) {
+		System.out.println(customerId + " - " + verificationID + " - " + status);
+	        CustomerVerification cv = oei.updateVerificationStatus(customerId, verificationID, status);
 	        return new ResponseEntity<CustomerVerification>(cv,HttpStatus.OK);
 	    }
 

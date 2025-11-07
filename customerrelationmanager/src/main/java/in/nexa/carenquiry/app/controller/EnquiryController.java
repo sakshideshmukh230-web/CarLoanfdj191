@@ -65,12 +65,32 @@ public class EnquiryController {
 			return new ResponseEntity<List<Enquiry>>(enquiry,HttpStatus.OK);
 		}  
 
+	  
 	  @GetMapping("/forwardedToOe/{customerId}")
 	  public ResponseEntity<Enquiry> forwardedToOe(@PathVariable("customerId")int customerId)
 	  {
 		  Enquiry enquiry = esi.forwardedToOe(customerId);
 		return new ResponseEntity<Enquiry>(enquiry,HttpStatus.OK);
 	  }  
+	  
+	  
+	  @GetMapping("/getforwardtoOE")
+	  public List<Enquiry> getforwardtoOE()
+	  {
+		  List<Enquiry> enquiry=esi.getforwardtoOE();
+		  
+		  return enquiry;
+		  
+	  }
+	  
+	  
+	  @GetMapping("/getapprovedenquiry")
+	  public ResponseEntity<List> getapprovedEnquiry()
+	  {
+		  List list=esi.getapprovedEnquiry();
+		  
+		  return new ResponseEntity<List>(list,HttpStatus.OK);
+       }
 	  
 	  
 	  @GetMapping("/rejectedStatus")

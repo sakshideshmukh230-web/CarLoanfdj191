@@ -28,7 +28,10 @@ public interface EnquiryServiceI {
 	List<String> approvedStatus();
 
 
-	
+	List<Enquiry> getforwardtoOE();
+
+
+	List getapprovedEnquiry();
 
 
 }
